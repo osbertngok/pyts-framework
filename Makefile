@@ -124,6 +124,10 @@ check: check-mypy-py3
 check-mypy-py3:
 	@.ve3/bin/python3 -m mypy
 
+.PHONY: lint
+lint:
+	@.ve3/bin/python3 -m black python/
+
 .PHONY: python
 python:
 	@.ve3/bin/python3
