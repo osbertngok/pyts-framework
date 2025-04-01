@@ -126,6 +126,7 @@ check-mypy-py3:
 
 .PHONY: lint
 lint:
+	@.ve3/bin/python3 -m isort python/
 	@.ve3/bin/python3 -m black python/
 
 .PHONY: python

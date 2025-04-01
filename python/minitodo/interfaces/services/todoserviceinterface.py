@@ -1,4 +1,5 @@
-from typing import Protocol, List
+from typing import List, Protocol
+
 from minitodo.dtos.todo_dto import TodoDTO
 
 
@@ -13,6 +14,8 @@ class TodoServiceInterface(Protocol):
 
     def get_todos(self) -> List[TodoDTO]: ...
 
-    def update_todo(self, id: int, title: str, description: str) -> TodoDTO: ...
+    def update_todo(
+        self, id: int, title: str, description: str, completed: bool
+    ) -> TodoDTO: ...
 
-    def delete_todo(self, id: int) -> None: ...
+    def delete_todo(self, id: int) -> bool: ...

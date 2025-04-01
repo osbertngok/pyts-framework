@@ -1,9 +1,11 @@
+from datetime import datetime
+from typing import List, Optional
+
+from minitodo.dtos.todo_dto import TodoDTO
+from minitodo.interfaces.services.todoserviceinterface import TodoServiceInterface
+from minitodo.models.todo import Todo
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
-from minitodo.interfaces.services.todoserviceinterface import TodoServiceInterface
-from minitodo.dtos.todo_dto import TodoDTO
-from minitodo.models.todo import Todo
-from typing import List
 
 
 class TodoService(TodoServiceInterface):
@@ -12,7 +14,13 @@ class TodoService(TodoServiceInterface):
 
     def create_todo(self, title: str, description: str) -> TodoDTO:
         with Session(self.engine) as session:
-            todo = Todo(title=title, description=description)
+            todo = Todo(
+                title=title,
+                description=description,
+                completed=False,
+                created_at=datetime.now().timestamp(),
+                updated_at=datetime.now().timestamp(),
+            )
             session.add(todo)
             session.commit()
             return todo.to_dto()
@@ -29,20 +37,32 @@ class TodoService(TodoServiceInterface):
             todos = session.query(Todo).all()
             return [todo.to_dto() for todo in todos]
 
-    def update_todo(self, id: int, title: str, description: str) -> TodoDTO:
+    def update_todo(
+        self,
+        id: int,
+        title: Optional[str],
+        description: Optional[str],
+        completed: Optional[bool],
+    ) -> TodoDTO:
         with Session(self.engine) as session:
             todo = session.query(Todo).filter(Todo.id == id).first()
             if todo is None:
                 raise ValueError(f"Todo with id {id} not found")
-            todo.title = title
-            todo.description = description
+            if title is not None:
+                todo.title = title
+            if description is not None:
+                todo.description = description
+            if completed is not None:
+                todo.completed = completed
+            todo.updated_at = int(datetime.now().timestamp())
             session.commit()
             return todo.to_dto()
 
-    def delete_todo(self, id: int) -> None:
+    def delete_todo(self, id: int) -> bool:
         with Session(self.engine) as session:
             todo = session.query(Todo).filter(Todo.id == id).first()
             if todo is None:
-                raise ValueError(f"Todo with id {id} not found")
+                return False
             session.delete(todo)
             session.commit()
+            return True

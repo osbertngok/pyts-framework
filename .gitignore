@@ -161,11 +161,13 @@ cython_debug/
 
 .ve3/
 build/
-python/blockytime/data/*.db
+python/minitodo/data/*.db
 
 
 # Dynamic data directories
-python/blockytime/data/dynamic/
+python/minitodo/data/dynamic/
+
+python/testminitodo/data/*.db
 
 # Mac
 .DS_Store

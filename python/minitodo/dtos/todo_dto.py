@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, Any
+from typing import Any, Dict, Optional
 
 
 @dataclass
@@ -18,3 +18,16 @@ class TodoDTO:
             "description": self.description,
             "completed": self.completed,
         }
+
+
+@dataclass
+class TodoCreateDTO:
+    title: str
+    description: str
+
+
+@dataclass
+class TodoUpdateDTO:
+    title: Optional[str]
+    description: Optional[str]
+    completed: Optional[bool]
