@@ -5,7 +5,7 @@ from .routes.todos import router as todos_router
 app = FastAPI(title="MiniTodo API", description="A simple Todo API")
 
 
-@app.get("/")
+@app.get("/api/v1/")
 async def root() -> dict[str, str]:
     """Root endpoint that returns a welcome message."""
     return {"message": "Welcome to MiniTodo API"}

@@ -90,10 +90,8 @@ build: build-python-env
 .PHONY: run
 run:
 	@echo "Running minitodo server on port ${MINITODO_SERVER_PORT}..."
-	@GOOGLE_API_KEY=${GOOGLE_API_KEY} \
-	FLASK_SECRET_KEY=${FLASK_SECRET_KEY} \
-	MINITODO_SERVER_PORT=${MINITODO_SERVER_PORT} \
-	.ve3/bin/python3 -m python.minitodo.server
+	@MINITODO_SERVER_PORT=${MINITODO_SERVER_PORT} \
+	.ve3/bin/python3 -m python.minitodo
 
 .PHONY: clean
 clean:
