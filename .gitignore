@@ -171,3 +171,6 @@ python/testminitodo/data/*.db
 
 # Mac
 .DS_Store
+
+# Demo Frontend
+typescript/v1/minitodo-app
