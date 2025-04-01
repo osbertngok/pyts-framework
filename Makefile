@@ -144,6 +144,10 @@ endif
 # Default to project's dynamic data directory
 export MINITODO_DATA_PATH ?= $(PWD)/python/minitodo/data
 
+.PHONY: fe-create
+fe-create:
+	@cd typescript/v1/ && npm create vite@latest minitodo-app -- --template react-swc-ts
+
 .PHONY: fe-install
 fe-install:
 	@cd typescript/v1/minitodo-app && npm install
