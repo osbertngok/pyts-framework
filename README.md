@@ -10,6 +10,8 @@ This is a framework for scaffolding Python-TypeScript projects. It is a minimali
   - SQLite
   - Pytest
   - black
+  - isort
+  - mypy
 - Frontend
   - React
   - TypeScript
